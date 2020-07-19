@@ -56,6 +56,9 @@ class Login extends Component {
   }
 
   render() {
+    if (localStorage.getItem('token')) {
+      this.redirect('/dashboard');
+    }
     return (
       <Form
         style={{ margin: '20px' }}

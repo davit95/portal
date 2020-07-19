@@ -1,4 +1,5 @@
 import React from 'react';
+import PrivateRoute from './PrivateRoute'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Home from '../Main/Home';
 import ThankYou from '../Main/ThankYou';
@@ -13,10 +14,10 @@ const Routes = (props) => {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/thank-you' component={ThankYou} />
-        <Route path='/dashboard' component={Dashboard} />
-        <Route path='/activate/:code' component={Activate} />
+        <PrivateRoute path='/dashboard' component={Dashboard} />
+        <PrivateRoute path='/activate/:code' component={Activate} />
         <Route path='/login' component={Login} />
-        <Route path='/change-email' component={ChangeEmail} />
+        <PrivateRoute path='/change-email' component={ChangeEmail} />
       </Switch>
     </Router>
   );
