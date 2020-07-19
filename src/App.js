@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import AppRouter from '../src/components/App/AppRouter';
 import { message, Modal } from 'antd';
@@ -21,10 +22,10 @@ class App extends React.Component {
     ];
 
     if (client.isLoggedIn()) {
-      // for (var i in this.events) {
-      //   window.addEventListener(this.events[i], this.resetTimeout);
-      // }
-      // this.setTimeout();
+      for (var i in this.events) {
+        window.addEventListener(this.events[i], this.resetTimeout);
+      }
+      this.setTimeout();
     }
    
   }
@@ -60,11 +61,25 @@ class App extends React.Component {
     this.info();
   }
 
+  redirect = () => {
+    return <Redirect to={'/logiin'} />
+  }
+
   logout = async () => {
     try {
+      Object.assign(http.defaults,
+        {
+          headers:
+          {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        }
+      )
       const response = await http.post('logout');
       if (response.data.status === 'success') {
         client.logout();
+        this.redirect();
+        message.success(response.data.message);
       } else {
         message.error(response.data.message);
       }
@@ -84,6 +99,7 @@ class App extends React.Component {
   }
 
   render () {
+    console.log(this.props);
     return <AppRouter />
   }
 }

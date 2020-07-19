@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Divider } from 'antd';
 import http from '../../http';
 import { client } from '../../Client';
 
@@ -20,10 +20,6 @@ const tailLayout = {
 };
 
 class Home extends Component {
-
-  componentDidMount() {
-    console.log(client.isLoggedIn())
-  }
 
   formRef = React.createRef();
 
@@ -102,53 +98,18 @@ class Home extends Component {
           <Button
             htmlType="submit"
             type="primary"
-            loading={this.props.loading}
           >
             Send Email
           </Button>
+          <Divider type={'vertical'} />
+          <Button
+            htmlType="submit"
+            type="primary"
+          >
+            Login
+          </Button>
         </Form.Item>
       </Form>
-      // <Form
-      //     {...layout}
-      //     name="normal_login"
-      //     className="login-form"
-      //     initialValues={{ remember: true }}
-      //     onFinish={this.onFinish}
-      //   >
-      //     <Form.Item
-      //       name="email"
-      //       label="E-mail"
-      //       rules={[
-      //         {
-      //           type: 'email',
-      //           message: 'The input is not valid E-mail!',
-      //         },
-      //         {
-      //           required: true,
-      //           message: 'Please input your E-mail!',
-      //         },
-      //       ]}
-      //     >
-      //       <Input  placeholder="Email" />
-      //     </Form.Item>
-      //     <Form.Item
-      //       label="Password"
-      //       name="password"
-      //       rules={[{ required: true, message: 'Please input your Password!' }]}
-      //     >
-      //       <Input
-              
-      //         type="password"
-      //         placeholder="Password"
-      //       />
-      //     </Form.Item>
-          
-      //     <Form.Item {...tailLayout}>
-      //       <Button type="primary" htmlType="submit" className="login-form-button">
-      //         Log in
-      //       </Button>
-      //     </Form.Item>
-      //   </Form> 
     )
   }
 }
